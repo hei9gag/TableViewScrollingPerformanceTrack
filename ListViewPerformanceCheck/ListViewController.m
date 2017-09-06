@@ -19,6 +19,7 @@
 @property (nonatomic, readwrite) CGFloat delayToStart;
 @property (nonatomic, readwrite) NSUInteger scrollOffSet;
 @property (nonatomic, readwrite) CGFloat delayBetween;
+@property (nonatomic, readwrite) BOOL isTracking;
 
 @end
 
@@ -51,9 +52,10 @@
     
     self.currentRepeatTime = 0;
     self.repeatTime = 10;
-    self.delayToStart = 2;
+    self.delayToStart = 1;
     self.scrollOffSet = [self.class postHeight] * 4;
-    self.delayBetween = 0.8;
+    self.delayBetween = 0.5;
+    self.isTracking = NO;
 }
 
 - (void)viewDidLayoutSubviews {
@@ -70,10 +72,25 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView {
+    if (!scrollView.dragging && self.isTracking) {
+        if (self.currentRepeatTime > self.repeatTime) {
+            self.isTracking = NO;
+            [self.performanceTracker stop];
+            self.rightItem.enabled = YES;
+            self.currentRepeatTime = 0;
+            return;
+        }
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayBetween * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            weakSelf.currentRepeatTime += 1;
+            [scrollView setContentOffset:CGPointMake(0,scrollView.contentOffset.y + self.scrollOffSet) animated:YES];
+        });
+    }
+}
+
 #pragma mark - FBAnimationPerformanceTrackerDelegate
 - (void)reportDurationInMS:(NSInteger)duration smallDropEvent:(double)smallDropEvent largeDropEvent:(double)largeDropEvent {
-//    The final recommended metric being: - SUM(duration) / SUM(smallDropEvent) aka the number of seconds between one frame drop or more
-//                                         - SUM(duration) / SUM(largeDropEvent) aka the number of seconds between four frame drops or more
     double numberOfFrameDropped = smallDropEvent;
     CGFloat frameDropPerSecond = numberOfFrameDropped/((CGFloat)(duration/1000.0));
     CGFloat framePerSecond = 60-frameDropPerSecond;
@@ -97,9 +114,6 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    for (NSInteger i = 0; i < 200; i++) {
-        NSLog(@"i:%zd", i);
     }
     return cell;
 }
@@ -132,26 +146,16 @@
 
 - (void)scrollPerformanceTrack {
     __weak typeof(self) weakSelf = self;
-    if (self.currentRepeatTime > self.repeatTime) {
-        [self.performanceTracker stop];
-        self.rightItem.enabled = YES;
-        return;
-    }
+    [self.tableview setContentOffset:CGPointZero animated:NO];
     if (self.currentRepeatTime == 0) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayToStart * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             weakSelf.currentRepeatTime += 1;
+            weakSelf.isTracking = YES;
             [weakSelf.performanceTracker start];
-            [weakSelf scrollPerformanceTrack];
+            UIScrollView *scrollView = weakSelf.tableview;
+            [scrollView setContentOffset:CGPointMake(0,scrollView.contentOffset.y + weakSelf.scrollOffSet) animated:YES];
         });
     }
-    
-    UIScrollView *scrollView = self.tableview;
-    [scrollView setContentOffset:CGPointMake(0,scrollView.contentOffset.y + self.scrollOffSet) animated:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(self.delayBetween * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        weakSelf.currentRepeatTime += 1;
-        [weakSelf scrollPerformanceTrack];
-    });
-
 }
 
 
