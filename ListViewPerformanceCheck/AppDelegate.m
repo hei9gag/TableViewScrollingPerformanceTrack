@@ -20,6 +20,7 @@
     // Override point for customization after application launch.
     ListViewController *viewController = [[ListViewController alloc] init];
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    
     [self.window setRootViewController:navController];    
     return YES;
 }

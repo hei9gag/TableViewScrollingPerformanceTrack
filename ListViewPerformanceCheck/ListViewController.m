@@ -121,7 +121,7 @@
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *title = nil;
     if ([self isAdIndex:indexPath]) {
-        title = @"Ad Index";
+        title = @"Ad Video Index";
     } else {
         title = [NSString stringWithFormat:@"Post %zd", indexPath.row + 1];
     }
