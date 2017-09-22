@@ -14,7 +14,6 @@
 @property (nonatomic, readonly) VideoAdPlayerView *videoAdPlayerView;
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-
 - (void)setWebOpenPresentingController:(UIViewController *)presentViewController;
 
 @end

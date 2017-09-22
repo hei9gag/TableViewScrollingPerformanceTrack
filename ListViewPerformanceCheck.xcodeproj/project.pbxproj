@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		A76CD1D01F739E290021CD0D /* VideoAdTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CD1CF1F739E290021CD0D /* VideoAdTableViewCell.m */; };
 		A76CD1D41F739E550021CD0D /* VideoAdPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CD1D31F739E550021CD0D /* VideoAdPlayerView.m */; };
-		A76CD1DA1F73A3530021CD0D /* DemoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A76CD1D91F73A3530021CD0D /* DemoViewController.m */; };
 		A76CDB661F74017E00C0CBB4 /* GoogleInteractiveMediaAds.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A7E6188B1F73B03600BD5AAD /* GoogleInteractiveMediaAds.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A7C88B3C1F5FE886000301B4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C88B3B1F5FE886000301B4 /* main.m */; };
 		A7C88B3F1F5FE886000301B4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C88B3E1F5FE886000301B4 /* AppDelegate.m */; };
@@ -18,8 +17,9 @@
 		A7C88B4A1F5FE886000301B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7C88B481F5FE886000301B4 /* LaunchScreen.storyboard */; };
 		A7C88B531F5FE8C2000301B4 /* ListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7C88B521F5FE8C2000301B4 /* ListViewController.m */; };
 		A7C88B591F5FF13D000301B4 /* FBAnimationPerformanceTracker.mm in Sources */ = {isa = PBXBuildFile; fileRef = A7C88B581F5FF13D000301B4 /* FBAnimationPerformanceTracker.mm */; };
+		A7E1A1E51F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E1A1E41F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.m */; };
+		A7E1A1E61F749D7800A3FB43 /* GoogleIMAAdsLoaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E1A1E21F749D0200A3FB43 /* GoogleIMAAdsLoaderManager.m */; };
 		A7E6187E1F73A44E00BD5AAD /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E6187D1F73A44E00BD5AAD /* WebKit.framework */; };
-		A7E618891F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E618881F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.m */; };
 		A7E6188D1F73B0C700BD5AAD /* GoogleInteractiveMediaAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A7E6188B1F73B03600BD5AAD /* GoogleInteractiveMediaAds.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,8 +43,6 @@
 		A76CD1CF1F739E290021CD0D /* VideoAdTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAdTableViewCell.m; sourceTree = "<group>"; };
 		A76CD1D21F739E550021CD0D /* VideoAdPlayerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAdPlayerView.h; sourceTree = "<group>"; };
 		A76CD1D31F739E550021CD0D /* VideoAdPlayerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAdPlayerView.m; sourceTree = "<group>"; };
-		A76CD1D81F73A3530021CD0D /* DemoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoViewController.h; sourceTree = "<group>"; };
-		A76CD1D91F73A3530021CD0D /* DemoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoViewController.m; sourceTree = "<group>"; };
 		A7C88B371F5FE886000301B4 /* ListViewPerformanceCheck.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListViewPerformanceCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7C88B3B1F5FE886000301B4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A7C88B3D1F5FE886000301B4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -57,9 +55,11 @@
 		A7C88B521F5FE8C2000301B4 /* ListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListViewController.m; sourceTree = "<group>"; };
 		A7C88B571F5FF13D000301B4 /* FBAnimationPerformanceTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBAnimationPerformanceTracker.h; sourceTree = "<group>"; };
 		A7C88B581F5FF13D000301B4 /* FBAnimationPerformanceTracker.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = FBAnimationPerformanceTracker.mm; sourceTree = "<group>"; };
+		A7E1A1E11F749D0200A3FB43 /* GoogleIMAAdsLoaderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleIMAAdsLoaderManager.h; sourceTree = "<group>"; };
+		A7E1A1E21F749D0200A3FB43 /* GoogleIMAAdsLoaderManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleIMAAdsLoaderManager.m; sourceTree = "<group>"; };
+		A7E1A1E31F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = VideoAdPlayerGoogleIMAMediator.h; sourceTree = "<group>"; };
+		A7E1A1E41F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VideoAdPlayerGoogleIMAMediator.m; sourceTree = "<group>"; };
 		A7E6187D1F73A44E00BD5AAD /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
-		A7E618871F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoogleIMAAdsLoaderManager.h; sourceTree = "<group>"; };
-		A7E618881F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoogleIMAAdsLoaderManager.m; sourceTree = "<group>"; };
 		A7E6188B1F73B03600BD5AAD /* GoogleInteractiveMediaAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInteractiveMediaAds.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -122,7 +122,7 @@
 		A7C88B391F5FE886000301B4 /* ListViewPerformanceCheck */ = {
 			isa = PBXGroup;
 			children = (
-				A7E618861F73AD6500BD5AAD /* Managers */,
+				A7E1A1DF1F749D0200A3FB43 /* GoogleIMA */,
 				A76CD1D51F739EB40021CD0D /* Frameworks */,
 				A76CD1D11F739E360021CD0D /* Views */,
 				A76CD1CD1F739E090021CD0D /* Cells */,
@@ -138,8 +138,6 @@
 				A7C88B3A1F5FE886000301B4 /* Supporting Files */,
 				A7C88B511F5FE8C2000301B4 /* ListViewController.h */,
 				A7C88B521F5FE8C2000301B4 /* ListViewController.m */,
-				A76CD1D81F73A3530021CD0D /* DemoViewController.h */,
-				A76CD1D91F73A3530021CD0D /* DemoViewController.m */,
 			);
 			path = ListViewPerformanceCheck;
 			sourceTree = "<group>";
@@ -152,21 +150,31 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A7E1A1DF1F749D0200A3FB43 /* GoogleIMA */ = {
+			isa = PBXGroup;
+			children = (
+				A7E1A1E01F749D0200A3FB43 /* Managers */,
+				A7E1A1E31F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.h */,
+				A7E1A1E41F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.m */,
+			);
+			path = GoogleIMA;
+			sourceTree = "<group>";
+		};
+		A7E1A1E01F749D0200A3FB43 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A7E1A1E11F749D0200A3FB43 /* GoogleIMAAdsLoaderManager.h */,
+				A7E1A1E21F749D0200A3FB43 /* GoogleIMAAdsLoaderManager.m */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		A7E6187C1F73A44E00BD5AAD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				A7E6187D1F73A44E00BD5AAD /* WebKit.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		A7E618861F73AD6500BD5AAD /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				A7E618871F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.h */,
-				A7E618881F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.m */,
-			);
-			path = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,13 +250,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7E1A1E51F749D2D00A3FB43 /* VideoAdPlayerGoogleIMAMediator.m in Sources */,
 				A7C88B591F5FF13D000301B4 /* FBAnimationPerformanceTracker.mm in Sources */,
 				A7C88B3F1F5FE886000301B4 /* AppDelegate.m in Sources */,
 				A76CD1D41F739E550021CD0D /* VideoAdPlayerView.m in Sources */,
+				A7E1A1E61F749D7800A3FB43 /* GoogleIMAAdsLoaderManager.m in Sources */,
 				A7C88B531F5FE8C2000301B4 /* ListViewController.m in Sources */,
-				A7E618891F73ADA900BD5AAD /* GoogleIMAAdsLoaderManager.m in Sources */,
 				A76CD1D01F739E290021CD0D /* VideoAdTableViewCell.m in Sources */,
-				A76CD1DA1F73A3530021CD0D /* DemoViewController.m in Sources */,
 				A7C88B3C1F5FE886000301B4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import "ListViewController.h"
-#import "DemoViewController.h"
 #import "GoogleIMAAdsLoaderManager.h"
 
 @interface AppDelegate ()
@@ -22,8 +21,7 @@
     // Override point for customization after application launch.
     [GoogleIMAAdsLoaderManager sharedManager];
     
-    ListViewController *listViewController = [[ListViewController alloc] init];
-    //DemoViewController *demoViewController = [[DemoViewController alloc] init];
+    ListViewController *listViewController = [[ListViewController alloc] init];    
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:listViewController];    
     [self.window setRootViewController:navController];    
     return YES;

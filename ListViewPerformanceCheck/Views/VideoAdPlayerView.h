@@ -16,7 +16,6 @@
 @property(nonatomic, weak) UIViewController * _Nullable webOpenerPresentingController;
 
 - (instancetype _Nonnull)init;
-- (void)requestAds;
-- (void)discardAd;
+- (void)requestAds:(NSString * _Nonnull)adTag;
 
 @end

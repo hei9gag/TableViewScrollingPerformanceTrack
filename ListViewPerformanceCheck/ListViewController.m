@@ -28,6 +28,12 @@
 
 static NSString *kSimpleTableIdentifier = @"SimpleTableItem";
 static NSString *kVideoAdCellIdentifier = @"VideoAdCellIdentifier";
+NSString *const kTestAppAdTagUrl = @"https://pubads.g.doubleclick.net/gampad/ads?sz=640x480&"
+@"iu=/124319096/external/single_ad_samples&ciu_szs=300x250&impl=s&gdfp_req=1&env=vp&"
+@"output=vast&unviewed_position_start=1&cust_params=deployment%3Ddevsite%26sample_ct%3Dlinear&"
+@"correlator=";
+
+NSString *const kSpotXAdTag = @"https://pubads.g.doubleclick.net/gampad/ads?sz=400x300&iu=/16921351/testingvideo&impl=s&gdfp_req=1&env=vp&output=vast&unviewed_position_start=1&url=[referrer_url]&description_url=[description_url]&correlator=[timestamp]";
 
 + (CGFloat)postHeight {
     return 250;
@@ -114,10 +120,11 @@ static NSString *kVideoAdCellIdentifier = @"VideoAdCellIdentifier";
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+    // NSLog(@"[ListView] cellForRowAtIndexPath:%zd", indexPath.row);
     if ([self isAdIndex:indexPath]) {
         VideoAdTableViewCell *videoAdCell = [tableView dequeueReusableCellWithIdentifier:kVideoAdCellIdentifier forIndexPath:indexPath];
         [videoAdCell setWebOpenPresentingController:self];
+        [videoAdCell.videoAdPlayerView requestAds:kTestAppAdTagUrl];
         return videoAdCell;
     } else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSimpleTableIdentifier forIndexPath:indexPath];
@@ -126,9 +133,9 @@ static NSString *kVideoAdCellIdentifier = @"VideoAdCellIdentifier";
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    // NSLog(@"[ListView] willDisplayCell:%zd", indexPath.row);
     if ([self isAdIndex:indexPath] && [cell isKindOfClass:[VideoAdTableViewCell class]]) {
-        VideoAdTableViewCell *videoAdCell = (VideoAdTableViewCell *)cell;
-        [videoAdCell.videoAdPlayerView requestAds];
+        // VideoAdTableViewCell *videoAdCell = (VideoAdTableViewCell *)cell;
     } else {
         NSString *title = [NSString stringWithFormat:@"Post %zd", indexPath.row + 1];
         cell.textLabel.text = title;
