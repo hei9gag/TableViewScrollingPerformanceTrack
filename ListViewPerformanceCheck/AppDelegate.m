@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "ListViewController.h"
+#import "DemoViewController.h"
+#import "GoogleIMAAdsLoaderManager.h"
 
 @interface AppDelegate ()
 
@@ -18,8 +20,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    ListViewController *viewController = [[ListViewController alloc] init];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [GoogleIMAAdsLoaderManager sharedManager];
+    
+    ListViewController *listViewController = [[ListViewController alloc] init];
+    //DemoViewController *demoViewController = [[DemoViewController alloc] init];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:listViewController];    
     [self.window setRootViewController:navController];    
     return YES;
 }

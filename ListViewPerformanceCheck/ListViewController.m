@@ -8,6 +8,7 @@
 
 #import "ListViewController.h"
 #import "FBAnimationPerformanceTracker.h"
+#import "VideoAdTableViewCell.h"
 
 @interface ListViewController () <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate, FBAnimationPerformanceTrackerDelegate>
 
@@ -25,6 +26,9 @@
 
 @implementation ListViewController
 
+static NSString *kSimpleTableIdentifier = @"SimpleTableItem";
+static NSString *kVideoAdCellIdentifier = @"VideoAdCellIdentifier";
+
 + (CGFloat)postHeight {
     return 250;
 }
@@ -35,6 +39,8 @@
     self.tableview = [[UITableView alloc] initWithFrame:CGRectZero];
     self.tableview.delegate = self;
     self.tableview.dataSource = self;
+    [self.tableview registerClass:[UITableViewCell class] forCellReuseIdentifier:kSimpleTableIdentifier];
+    [self.tableview registerClass:[VideoAdTableViewCell class] forCellReuseIdentifier:kVideoAdCellIdentifier];
     [self.view addSubview:self.tableview];
     
     self.rightItem = [[UIBarButtonItem alloc] initWithTitle:@"Begin Test" style:UIBarButtonItemStylePlain target:self action:@selector(rightBarItemTap:)];
@@ -108,24 +114,25 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *simpleTableIdentifier = @"SimpleTableItem";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    if ([self isAdIndex:indexPath]) {
+        VideoAdTableViewCell *videoAdCell = [tableView dequeueReusableCellWithIdentifier:kVideoAdCellIdentifier forIndexPath:indexPath];
+        [videoAdCell setWebOpenPresentingController:self];
+        return videoAdCell;
+    } else {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kSimpleTableIdentifier forIndexPath:indexPath];
+        return cell;
     }
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *title = nil;
-    if ([self isAdIndex:indexPath]) {
-        title = @"Ad Index";
+    if ([self isAdIndex:indexPath] && [cell isKindOfClass:[VideoAdTableViewCell class]]) {
+        VideoAdTableViewCell *videoAdCell = (VideoAdTableViewCell *)cell;
+        [videoAdCell.videoAdPlayerView requestAds];
     } else {
-        title = [NSString stringWithFormat:@"Post %zd", indexPath.row + 1];
-    }
-    cell.textLabel.text = title;
+        NSString *title = [NSString stringWithFormat:@"Post %zd", indexPath.row + 1];
+        cell.textLabel.text = title;
+    }    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +142,7 @@
 
 - (BOOL)isAdIndex:(NSIndexPath *)indexPath {
     NSUInteger rowIndex = indexPath.row + 1;
-    return rowIndex % 6 == 0;
+    return rowIndex % 10 == 0;
 }
 
 #pragma mark - Private
